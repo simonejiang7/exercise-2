@@ -7,30 +7,30 @@
             (staffAtReception)
             )
     (:action unlock
-        :parameters (?t - time ?i - inh ?r - room)
+        :parameters (?t1 - time ?t2 - time ?i - inh ?r - room)
         :precondition (
-            and (lock ?r) (before ?t (time 24)) (canArrive ?t ?i ?r) (staffAtReception)
+            and (lock ?r) (before ?t1 ?t2) (canArrive ?t1 ?i ?r) (staffAtReception)
         )
         :effect (
-            and (not (lock ?r)) (not (canArrive ?t ?i ?r)) (arrive ?t ?i ?r) (not (staffAtReception))
+            and (not (lock ?r)) (arrive ?t1 ?i ?r) (not (staffAtReception))
         )
     )
     (:action join
         :parameters (?t - time ?i - inh ?r - room)
         :precondition (
-            and (arrive ?t ?i ?r) 
+            and (arrive ?t ?i ?r)
         )
         :effect(
             (join ?t ?i ?r)
         )
     )
     (:action showRoom
-        :parameters (?t - time ?i - inh ?r - room)
+        :parameters (?t1 - time ?t2 - time ?i - inh ?r - room)
         :precondition (
-            (join ?t ?i ?r)
+            (join ?t1 ?i ?r)
         )
         :effect(
-            and(setup ?i ?r) (before ?t (time 24)) (staffAtReception)
+            and(setup ?i ?r) (before ?t1 ?t2) (staffAtReception)
         )
     )
 )
