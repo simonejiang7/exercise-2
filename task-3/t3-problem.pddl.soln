@@ -1,0 +1,4 @@
+(move reception1 storage1)
+(gethoover storage1)
+(move storage1 room1)
+(cleanroom room1)
